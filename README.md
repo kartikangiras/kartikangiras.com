@@ -8,6 +8,8 @@ Personal website of Kartik Angiras. Plain HTML, CSS and a little JavaScript: no 
 index.html                      Home: intro, links, Work cards
 photo.jpg                       Headshot on the home page
 og.png                          Link-preview image (LinkedIn, X, WhatsApp)
+favicon.ico, favicon-*.png      Browser tab icon (16, 32, 48 px)
+apple-touch-icon.png            Icon for phone home screens (180 px)
 
 projects.html                   Projects page
 projects/*.jpg                  Project thumbnails
