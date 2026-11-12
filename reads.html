@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reads · Kartik Angiras</title>
+<meta name="description" content="What Kartik Angiras reads: courses, papers, books, videos and essays.">
+<link rel="canonical" href="https://kartikangiras.com/reads.html">
+<meta name="author" content="Kartik Angiras">
+<meta name="theme-color" content="#fafaf8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kartik Angiras">
+<meta property="og:title" content="Reads · Kartik Angiras">
+<meta property="og:description" content="What Kartik Angiras reads: courses, papers, books, videos and essays.">
+<meta property="og:url" content="https://kartikangiras.com/reads.html">
+<meta property="og:image" content="https://kartikangiras.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kartikangiras">
+<meta name="twitter:title" content="Reads · Kartik Angiras">
+<meta name="twitter:description" content="What Kartik Angiras reads: courses, papers, books, videos and essays.">
+<meta name="twitter:image" content="https://kartikangiras.com/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+@font-face { font-family: "et-book"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff"); }
+@font-face { font-family: "et-book"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); }
+:root {
+  --background: #fafaf8; --foreground: #111111; --muted: #6b7280; --card: #f4f4f2; --border: #e5e5e3;
+  --font: "et-book", "Crimson Pro", Palatino, "Palatino Linotype", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font);
+  font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; border-radius: 3px; }
+.page { max-width: 672px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 56px 0; }
+.back { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); transition: color .15s; }
+.back:hover { color: var(--foreground); }
+.back svg { width: 12px; height: 12px; }
+h1 { margin: 32px 0 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.025em; }
+.lede { margin: 12px 0 0; font-size: 16px; line-height: 1.625; color: var(--muted); }
+.label { margin: 48px 0 16px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.rows { border-top: 1px solid var(--border); }
+.row { display: flex; align-items: baseline; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--border); }
+.row .name { flex: 1; min-width: 0; font-size: 14px; }
+a.row:hover .name { text-decoration: underline; text-underline-offset: 2px; }
+.row .meta { flex-shrink: 0; font-size: 12px; color: var(--muted); }
+.row .meta.mono { font-family: var(--mono); }
+.row svg { flex-shrink: 0; width: 14px; height: 14px; color: var(--border); transition: color .15s; align-self: center; }
+a.row:hover svg { color: var(--foreground); }
+footer { margin-top: 64px; padding-block: 40px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+footer p { margin: 0; }
+.cats { margin-top: 32px; }
+.cats p { margin: 0 0 14px; font-size: 16px; line-height: 1.6; }
+.cats a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.cats a:hover { text-decoration-thickness: 2px; }
+.cats strong { font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>back</a>
+  <h1>Reads</h1>
+  <p class="lede">A small library of what I've read, and what I took from it.</p>
+  <div class="cats">
+    <p><a href="reads/stem.html">STEM</a>: courses and lectures, from learning to code to distributed systems and AI safety.</p>
+    <p><a href="literature-reviews.html">Papers</a>: literature reviews of research papers, with notes from implementing them.</p>
+    <p><a href="reads/books.html">Books</a>: technology, startups, wealth, the mind, and fiction.</p>
+    <p><a href="reads/videos.html">Videos</a>: a catalogue of talks and interviews worth watching.</p>
+    <p><strong>Thoughts</strong>: essays worth rereading, by <a href="https://paulgraham.com/articles.html" target="_blank" rel="noopener">Paul Graham</a> and <a href="https://blog.samaltman.com/" target="_blank" rel="noopener">Sam Altman</a>.</p>
+  </div>
+  <footer><p>built by Kartik Angiras, 2026</p></footer>
+</main>
+
+</body>
+</html>

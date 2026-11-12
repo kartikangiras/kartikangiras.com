@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects · Kartik Angiras</title>
+<meta name="description" content="Projects by Kartik Angiras: Sindarin, DeVries, Mordor and Tripwire.">
+<link rel="canonical" href="https://kartikangiras.com/projects.html">
+<meta name="author" content="Kartik Angiras">
+<meta name="theme-color" content="#fafaf8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kartik Angiras">
+<meta property="og:title" content="Projects · Kartik Angiras">
+<meta property="og:description" content="Projects by Kartik Angiras: Sindarin, DeVries, Mordor and Tripwire.">
+<meta property="og:url" content="https://kartikangiras.com/projects.html">
+<meta property="og:image" content="https://kartikangiras.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kartikangiras">
+<meta name="twitter:title" content="Projects · Kartik Angiras">
+<meta name="twitter:description" content="Projects by Kartik Angiras: Sindarin, DeVries, Mordor and Tripwire.">
+<meta name="twitter:image" content="https://kartikangiras.com/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+@font-face { font-family: "et-book"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff"); }
+@font-face { font-family: "et-book"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); }
+:root {
+  --background: #fafaf8; --foreground: #111111; --muted: #6b7280; --card: #f4f4f2; --border: #e5e5e3;
+  --font: "et-book", "Crimson Pro", Palatino, "Palatino Linotype", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font);
+  font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; border-radius: 3px; }
+.page { max-width: 672px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 56px 0; }
+.back { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); transition: color .15s; }
+.back:hover { color: var(--foreground); }
+.back svg { width: 12px; height: 12px; }
+h1 { margin: 32px 0 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.025em; }
+.lede { margin: 12px 0 0; font-size: 16px; line-height: 1.625; color: var(--muted); }
+.label { margin: 48px 0 16px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.rows { border-top: 1px solid var(--border); }
+.row { display: flex; align-items: baseline; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--border); }
+.row .name { flex: 1; min-width: 0; font-size: 14px; }
+a.row:hover .name { text-decoration: underline; text-underline-offset: 2px; }
+.row .meta { flex-shrink: 0; font-size: 12px; color: var(--muted); }
+.row .meta.mono { font-family: var(--mono); }
+.row svg { flex-shrink: 0; width: 14px; height: 14px; color: var(--border); transition: color .15s; align-self: center; }
+a.row:hover svg { color: var(--foreground); }
+footer { margin-top: 64px; padding-block: 40px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+footer p { margin: 0; }
+.grid { margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; row-gap: 40px; }
+.card { display: flex; flex-direction: column; min-width: 0; }
+.thumb { display: block; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; border-radius: 8px;
+  background: var(--card); box-shadow: 0 0 0 1px var(--border); transition: opacity .15s; }
+.thumb:hover { opacity: .8; }
+.thumb canvas, .thumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.card h3 { margin: 12px 0 0; font-size: 14px; line-height: 1.375; font-weight: 400; text-wrap: balance; }
+.card h3 a { font-weight: 600; text-underline-offset: 2px; }
+.card h3 a:hover { text-decoration: underline; }
+.date { margin: 4px 0 0; font-size: 12px; line-height: 1.4; color: var(--muted); }
+.desc { margin: 8px 0 0; font-size: 14px; line-height: 1.625; }
+@media (max-width: 560px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>back</a>
+  <h1>Projects</h1>
+  <p class="lede">Things I've built, mostly around AI safety and applied machine learning.</p>
+  <div class="grid" id="projects-grid"></div>
+  <footer><p>built by Kartik Angiras, 2026</p></footer>
+</main>
+<script>
+// Your projects. Add an `img` field (path to a screenshot, e.g. "projects/devries.png") to replace the drawn placeholder.
+const PROJECTS = [
+  { title: "Sindarin: Finance Agents That Can't Touch the Money", date: "Nov 2026", cat: "Applied AI",
+    href: "https://sindarin-nu.vercel.app/",
+    img: "projects/sindarin.jpg",
+    desc: "AI agents draft a finance team's plans, payment runs and closing entries in chat. Model-free executors check who approved, from which room, and whether the ledger changed before anything moves." },
+  { title: "DeVries: Injection Path Audits for AI Agents", date: "Oct 2026", cat: "AI Safety",
+    href: "https://devries-falkor.vercel.app/",
+    img: "projects/devries.jpg",
+    desc: "Models a multi-agent system as a graph and finds every path where untrusted text can reach a high-impact action, then finds the smallest fix and verifies it on a sandboxed copy before a human approves it." },
+  { title: "Mordor: Stubble-Smoke Forecasting", date: "Oct 2026", cat: "Environmental Forecasting",
+    href: "https://d3mp6hbfwg9kx1.cloudfront.net/",
+    img: "projects/mordor.jpg",
+    desc: "A 5 km, 48-hour PM2.5 forecast of crop-fire smoke, turned into action cards for schools and hospitals. Beat the CAMS baseline on hourly error across 97 stations in a hindcast." },
+  { title: "Tripwire: Provenance Monitor for Agent Swarms", date: "Oct 2026", cat: "AI Safety",
+    href: "https://github.com/kartikangiras/tripwire",
+    img: "projects/tripwire.jpg",
+    desc: "Flags claims that lose their context as they spread between agents. On a 194K-record log from 46 agents, it caught a wrong figure that circulated for 12 days and was later certified by an agent." },
+];
+function drawThumb(canvas, item) {
+  const dpr = window.devicePixelRatio || 1, w = 320, h = 200;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const ctx = canvas.getContext("2d"); ctx.scale(dpr, dpr);
+  let seed = [...item.title].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  ctx.fillStyle = "#f4f4f2"; ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = "#9a9a96"; ctx.fillStyle = "#ffffff"; ctx.lineWidth = 1.2;
+  const cols = 3 + Math.floor(rnd() * 3), nodes = [];
+  for (let c = 0; c < cols; c++) {
+    const n = 2 + Math.floor(rnd() * 3), x = 40 + c * ((w - 80) / (cols - 1));
+    nodes.push([...Array(n)].map((_, i) => [x, (h / (n + 1)) * (i + 1)]));
+  }
+  for (let c = 0; c < cols - 1; c++)
+    nodes[c].forEach(a => nodes[c + 1].forEach(b => { if (rnd() > .3) { ctx.beginPath(); ctx.moveTo(...a); ctx.lineTo(...b); ctx.stroke(); } }));
+  nodes.flat().forEach(([x, y]) => { ctx.beginPath(); ctx.arc(x, y, 9, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); });
+}
+
+function renderCards(items, gridId) {
+  const grid = document.getElementById(gridId);
+  items.forEach(w => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <a class="thumb" href="${w.href}" target="_blank" rel="noopener" aria-label="${w.title}">
+        ${w.img ? `<img src="${w.img}" alt="${w.title}">` : `<canvas aria-hidden="true"></canvas>`}
+      </a>
+      <h3><a href="${w.href}" target="_blank" rel="noopener">${w.title}</a></h3>
+      <p class="date">${w.date}, ${w.cat}</p>
+      <p class="desc">${w.desc}</p>`;
+    grid.appendChild(card);
+    const cv = card.querySelector("canvas");
+    if (cv) drawThumb(cv, w);
+  });
+}
+renderCards(PROJECTS, "projects-grid");
+</script>
+</body>
+</html>

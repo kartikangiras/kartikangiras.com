@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Limits of Embedding Retrieval · Kartik Angiras</title>
+<meta name="description" content="A review of On the Theoretical Limitations of Embedding-Based Retrieval, with analysis for vector databases and agent systems.">
+<link rel="canonical" href="https://kartikangiras.com/literature-reviews/machine-learning/limits-of-embedding-retrieval.html">
+<meta name="author" content="Kartik Angiras">
+<meta name="theme-color" content="#fafaf8">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Kartik Angiras">
+<meta property="og:title" content="Limits of Embedding Retrieval · Kartik Angiras">
+<meta property="og:description" content="A review of On the Theoretical Limitations of Embedding-Based Retrieval, with analysis for vector databases and agent systems.">
+<meta property="og:url" content="https://kartikangiras.com/literature-reviews/machine-learning/limits-of-embedding-retrieval.html">
+<meta property="og:image" content="https://kartikangiras.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kartikangiras">
+<meta name="twitter:title" content="Limits of Embedding Retrieval · Kartik Angiras">
+<meta name="twitter:description" content="A review of On the Theoretical Limitations of Embedding-Based Retrieval, with analysis for vector databases and agent systems.">
+<meta name="twitter:image" content="https://kartikangiras.com/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+@font-face { font-family: "et-book"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff"); }
+@font-face { font-family: "et-book"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); }
+:root {
+  --background: #fafaf8; --foreground: #111111; --muted: #6b7280; --card: #f4f4f2; --border: #e5e5e3;
+  --font: "et-book", "Crimson Pro", Palatino, "Palatino Linotype", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font);
+  font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; border-radius: 3px; }
+.page { max-width: 672px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 56px 0; }
+.back { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); transition: color .15s; }
+.back:hover { color: var(--foreground); }
+.back svg { width: 12px; height: 12px; }
+h1 { margin: 32px 0 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.025em; }
+.lede { margin: 12px 0 0; font-size: 16px; line-height: 1.625; color: var(--muted); }
+.label { margin: 48px 0 16px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.rows { border-top: 1px solid var(--border); }
+.row { display: flex; align-items: baseline; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--border); }
+.row .name { flex: 1; min-width: 0; font-size: 14px; }
+a.row:hover .name { text-decoration: underline; text-underline-offset: 2px; }
+.row .meta { flex-shrink: 0; font-size: 12px; color: var(--muted); }
+.row .meta.mono { font-family: var(--mono); }
+.row svg { flex-shrink: 0; width: 14px; height: 14px; color: var(--border); transition: color .15s; align-self: center; }
+a.row:hover svg { color: var(--foreground); }
+footer { margin-top: 64px; padding-block: 40px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+footer p { margin: 0; }
+.kicker { margin: 32px 0 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.page h1.paper { margin-top: 0; line-height: 1.2; text-wrap: balance; }
+.authors { margin: 12px 0 0; font-size: 14px; line-height: 1.625; color: var(--muted); }
+.review { margin-top: 32px; }
+.review p, .review li { font-size: 15px; line-height: 1.7; }
+.review p { margin: 0 0 16px; }
+.review ul { margin: 0 0 16px; padding-left: 20px; }
+.review li { margin-bottom: 6px; }
+.review li::marker { color: var(--muted); }
+.review h2 { margin: 36px 0 12px; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.review a { text-decoration: underline; text-underline-offset: 2px; }
+.review code { font-family: var(--mono); font-size: 13px; background: var(--card); padding: 1px 5px; border-radius: 4px; }
+.review pre { margin: 0; padding: 14px 16px; overflow-x: auto; background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; font-family: var(--mono); font-size: 12px; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <a class="back" href="../machine-learning.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Machine Learning</a>
+  <p class="kicker">Machine Learning · arXiv:2508.21038 · 2025</p>
+  <h1 class="paper">On the Theoretical Limitations of Embedding-Based Retrieval</h1>
+  <p class="authors">Orion Weller, Michael Boratko, Iftekhar Naim, Jinhyuk Lee · Google DeepMind and Johns Hopkins University</p>
+  <p class="lede">A proof and a stress test showing that single-vector retrieval has a ceiling set by embedding size, and that today's best models hit it on queries as simple as "who likes X?" My analysis, from someone who moves vectors between databases for a living.</p>
+  <article class="review">
+    <h2>The problem</h2>
+    <p>Dense embeddings started as a tool for semantic search and are now asked to do much more: follow instructions, reason, retrieve code, and match any notion of relevance a user can phrase. When they fail, the usual explanation is that the query was unrealistic, and that more training data or a bigger model will close the gap. This paper asks whether some of those failures are structural.</p>
+    <h2>The core idea</h2>
+    <p>With one vector per query and one per document, retrieval is a geometry problem. The top-k results for a query are the documents its vector points closest to, so the set of distinct top-k results a system can ever return is limited by how many ways you can carve up a d-dimensional space. If a task needs more combinations of documents than the dimension allows, no amount of training will find vectors that return all of them.</p>
+    <h2>The theory</h2>
+    <p>The authors bound how many k-document subsets can each be returned as the top-k of some query. Requiring all of them pushes the minimum dimension up with the logarithm of the number of subsets, and the appendix gives an equivalent statement in terms of the sign-rank of the relevance matrix. The bound itself is loose. For 100 documents and top-2 retrieval it only asks for 4 dimensions, while the experiments below need more than 18.</p>
+    <h2>The experiments</h2>
+    <ul>
+      <li><strong>Free embeddings, the best case.</strong> They skip language entirely and directly optimize a vector for every document and every pair of documents, on the test set itself. For each dimension they find the largest corpus where every top-2 pair is still retrievable. That limit grows roughly cubically with dimension: about 500k documents at 512 dimensions, 4 million at 1024, and 250 million at 4096.</li>
+      <li><strong>The LIMIT dataset.</strong> Documents describe people and the things they like, and each of 1,000 queries is a plain "who likes X?" with exactly two right answers. The queries are arranged so that every pair among 46 documents is the answer to some query, which is exactly the combinatorial pressure the theory predicts will break single vectors. The full version hides those 46 among 50,000 documents.</li>
+      <li><strong>Results.</strong> Strong embedding models, including Gemini Embeddings, Qwen3 Embedding, GritLM, E5-Mistral, Promptriever and Snowflake Arctic Embed, stay under 20% recall@100 on the full set. Even on the 46-document version the best reach less than 60% recall@2. BM25 comes close to perfect, a multi-vector ColBERT-style model does much better but doesn't solve it, and a long-context reranker solves every query.</li>
+      <li><strong>It's not domain shift.</strong> Fine-tuning an embedding model on LIMIT's training split barely moves recall@10, which peaks at 2.8. Training on the test set works, which shows the model can memorize the task but not represent it in general.</li>
+    </ul>
+    <h2>My analysis</h2>
+    <ul>
+      <li><strong>The geometry is the bottleneck, not the index.</strong> My Milvus connector streams vectors into Postgres so similarity search can run in plain SQL with pgvector. Faster indexes, better sharding and fresher data all help, but none of them change which top-k sets the vectors can express. This paper is a reminder that a retrieval system can be perfectly engineered and still be unable to return the right answer.</li>
+      <li><strong>BM25 wins for a reason worth understanding.</strong> A sparse lexical model effectively has one dimension per vocabulary word, so it has room for far more combinations. It is not strictly better: the authors note BM25 collapses by more than 89% once queries use synonyms. That makes hybrid retrieval, sparse and dense together, a principled design and not a hack.</li>
+      <li><strong>For agents, these failures are silent.</strong> In systems like Sindarin or the ones DeVries audits, an agent that retrieves the wrong policy or misses one of two relevant records doesn't crash. It answers confidently with incomplete context. When retrieval feeds a decision that matters, I'd rather pay for a reranker or a structured query than trust a single vector.</li>
+      <li><strong>Where I'm skeptical.</strong> LIMIT is deliberately adversarial: it requires every pair of 46 documents to be retrievable, and most real corpora never need arbitrary combinations like that. The 250 million figure is also a best case optimized on the test set, and real models fail far earlier, which says training matters as much as dimension. The practical lesson for me is less "4096 dimensions caps you at N documents" and more "queries that combine arbitrary attributes are where single vectors break first", and instruction-following retrieval is pushing straight toward that.</li>
+    </ul>
+    <h2>Limitations</h2>
+    <p>The theoretical bound is far below what models actually need, so it explains the existence of the ceiling but not where it sits in practice. LIMIT is one carefully constructed dataset, and the authors don't prove which relevance patterns are hardest. The alternatives they discuss each have costs: rerankers don't scale to first-stage retrieval, multi-vector models are untested on instruction-heavy tasks, and sparse models need lexical overlap.</p>
+    <h2>Why it matters</h2>
+    <p>Retrieval-augmented generation and agent memory mostly sit on single-vector search, and the default fix for bad retrieval is a bigger embedding model. This paper shows there is a point where that stops working, and gives a cheap way to test for it. For anyone building retrieval into agent systems, it argues for treating multi-stage retrieval, with sparse, dense and reranking layers, as the baseline.</p>
+    <h2>Citation</h2>
+    <pre>@article{weller2025theoretical,
+  title   = {On the Theoretical Limitations of Embedding-Based Retrieval},
+  author  = {Weller, Orion and Boratko, Michael and Naim, Iftekhar and Lee, Jinhyuk},
+  journal = {arXiv preprint arXiv:2508.21038},
+  year    = {2025}
+}</pre>
+  </article>
+  <footer><p>built by Kartik Angiras, 2026</p></footer>
+</main>
+
+</body>
+</html>

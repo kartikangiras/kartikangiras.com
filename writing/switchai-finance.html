@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SwitchAI Finance Workflow · Kartik Angiras</title>
+<meta name="author" content="Kartik Angiras">
+<meta name="theme-color" content="#fafaf8">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Kartik Angiras">
+<meta property="og:title" content="SwitchAI Finance Workflow · Kartik Angiras">
+<meta property="og:description" content="Building Sindarin: AI agents that draft a finance team&#x27;s plans, payments and closing entries in chat, while only code can act after a person approves.">
+<meta property="og:url" content="https://kartikangiras.com/writing/switchai-finance.html">
+<meta property="og:image" content="https://kartikangiras.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kartikangiras">
+<meta name="twitter:title" content="SwitchAI Finance Workflow · Kartik Angiras">
+<meta name="twitter:description" content="Building Sindarin: AI agents that draft a finance team&#x27;s plans, payments and closing entries in chat, while only code can act after a person approves.">
+<meta name="twitter:image" content="https://kartikangiras.com/og.png">
+<link rel="canonical" href="https://kartikangiras.com/writing/switchai-finance.html">
+<meta name="description" content="Building Sindarin: AI agents that draft a finance team's plans, payments and closing entries in chat, while only code can act after a person approves.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+@font-face { font-family: "et-book"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff"); }
+@font-face { font-family: "et-book"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); }
+:root {
+  --background: #fafaf8; --foreground: #111111; --muted: #6b7280; --card: #f4f4f2; --border: #e5e5e3;
+  --font: "et-book", "Crimson Pro", Palatino, "Palatino Linotype", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font);
+  font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; border-radius: 3px; }
+.page { max-width: 672px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 56px 0; }
+.back { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); transition: color .15s; }
+.back:hover { color: var(--foreground); }
+.back svg { width: 12px; height: 12px; }
+h1 { margin: 32px 0 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.025em; }
+.lede { margin: 12px 0 0; font-size: 16px; line-height: 1.625; color: var(--muted); }
+.label { margin: 48px 0 16px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.rows { border-top: 1px solid var(--border); }
+.row { display: flex; align-items: baseline; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--border); }
+.row .name { flex: 1; min-width: 0; font-size: 14px; }
+a.row:hover .name { text-decoration: underline; text-underline-offset: 2px; }
+.row .meta { flex-shrink: 0; font-size: 12px; color: var(--muted); }
+.row .meta.mono { font-family: var(--mono); }
+.row svg { flex-shrink: 0; width: 14px; height: 14px; color: var(--border); transition: color .15s; align-self: center; }
+a.row:hover svg { color: var(--foreground); }
+footer { margin-top: 64px; padding-block: 40px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+footer p { margin: 0; }
+.post-meta { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+.post-body { margin-top: 40px; }
+.post-body p { margin: 0 0 20px; font-size: 17px; line-height: 1.7; }
+.post-body h2 { margin: 40px 0 12px; font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+.post-body a { text-decoration: underline; text-underline-offset: 2px; }
+.post-note { margin-top: 32px; font-size: 14px; color: var(--muted); }
+.post-note a { text-decoration: underline; text-underline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <a class="back" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>back</a>
+  <h1>How I Built a Corporate Finance Production Workflow into Chat with SwitchAI</h1>
+  <p class="post-meta">November 8, 2026 · 9 min read</p>
+  <article class="post-body">
+    <p>I wanted to find out whether an AI agent could sit in a finance team’s chat and be trusted with the month without ever being trusted with the money. I wanted a colleague that drafts the plan, the payment run and the closing entries, and then waits, rather than a chatbot that answers questions about the ledger. Everything hinges on that pause. The agent drafts, someone with the authority says yes, and only then does anything move.</p>
+    <p>That is what Sindarin became, and Switch is the layer that made the pause enforceable. This is the story of how it came together, what Switch gave me, and where it pushed back.</p>
+    <h2>Where it started</h2>
+    <p>The first version had nothing to do with finance. It was a software team’s flow. A product agent wrote the spec, a coder opened the pull request, a reviewer read it, a release agent shipped it, and every hand-off waited for a person to say yes. I built it to learn Switch, and it taught me the shape of everything that followed, even though I threw the scene away later.</p>
+    <p>Switch, for anyone who has not run it, gives AI agents a place inside a team’s chat. It runs as a Docker stack with the core, a database, a Gateway and, if you want it, a bundled Mattermost. Instead of logging into Mattermost, agents register with the Switch bridge, connect over a WebSocket, and receive the room’s events with a participant id on every one of them. People stay in the chat app they already use. The bridge carries both directions.</p>
+    <h2>First contact</h2>
+    <p>Before designing anything I wrote a spike. It checked the things the design would lean on. Rooms created through the Gateway had to appear as Mattermost channels and deliver events to my agents. A Mattermost user’s participant id had to be stable and identical no matter which agent saw it. A threaded reply from an agent had to render as a real thread. An agent whose addressing was scoped to its rooms had to still receive a mention from elsewhere, marked as not addressed, while Switch refused it visibly in the room. Each item became a line in a report and later a test. The habit stuck. Every Switch feature I used afterwards was verified live before code depended on it.</p>
+    <p>The frames were worth reading closely. On connect the bridge sends a connection state with a cursor, a generation and the rooms the agent is in. Pings arrive on a heartbeat and must be answered. An eviction tells you whether to reconnect, because a heartbeat lapsed, or to stop, because another connection took over your identity. Messages carry the sender’s participant id, a display name, a thread id, an addressed flag and the bridge the room lives on. I parsed all of that into frozen dataclasses with no I/O, so the same parser serves the live client and the tests.</p>
+    <h2>The rule that shaped everything</h2>
+    <p>Early on I split the system into agents and executors and never let the line blur.</p>
+    <p>Agents run on Claude with a prompt, a handful of strict tools and a set of message rules. They draft. A proposal can leave an agent only if a tool produced it byte for byte. If the model tries to hand-write one, the guard throws it out and the agent rephrases. The analyst’s prompt says plainly that it never types a number, a total or a date itself. Nothing an agent holds can change anything.</p>
+    <p>Executors run no model at all. The Switch executor holds the Gateway credential and opens rooms. The ledger executor holds the books and is the only thing that writes to them. When a person types approve, the executor checks who they are by participant id, whether that id is in the group the rule names, whether the command came from the rule’s room, whether the artifact is still pending, and whether the ledger still matches what the agent proposed against. If any of that fails, it says so in the room and does nothing. I kept the executors outside the model on purpose, because a prompt can be talked out of a rule and code cannot.</p>
+    <p>Participant ids made this honest. Anyone can edit a display name, so an impostor who renames themselves after the CEO gets the same refusal as a salesperson who was never in the group. The groups in the policy file are lists of ids, written there by the bootstrap, and the executors reload the file when it changes.</p>
+    <h2>Throwing the scene away</h2>
+    <p>The software demo worked end to end, and I did not enjoy watching it. It was cluttered, approvals flowed back and forth, and an audience had to hold too much in their head. One evening I dropped it and asked what a finance team would do with the same engine.</p>
+    <p>Almost everything mapped. Segregation of duties was the self-approval rule I already had. Spending limits became a question of which group may approve, chosen by the total the executor read from the ledger rather than the total in the agent’s fence. A duplicate payment was single use. An invoice edited while a payment run waited for its yes was the ledger re-read. And anyone who has worked inside a company understands “who approved this payment” without a diagram.</p>
+    <p>So the roles changed. An analyst reports the month. A planner proposes goals and then a budget under the approved cap. A bookkeeper proposes the register entries, the close plan and the lock. Treasury proposes the payment run from the open payables. Sales prices a deal from the price book. The executors stayed exactly as they were, which told me the split had been right.</p>
+    <h2>Growing into Switch</h2>
+    <p>Identity came first and rooms came right behind it. When the CFO approves the month’s goals, the Switch executor opens a room for that period. It seats the approvers, the chain’s agents and the ledger executor, writes the brief as the room’s instructions, and then dresses the room. The brief is attached as a Switch document, the new room is linked from the finance room with a label, and it joins a room group named after the company. Each of those is a Gateway call, and each is fail-soft, because a chain should not stall when a document fails to attach.</p>
+    <p>Addressing policies turned out to be a quiet safety feature. Each agent is scoped to the rooms it belongs in, and when the executor opens a new room it widens the policies of the agents it seats there. Switch then refuses, in the room, anything addressed to an agent outside its scope. My executors still re-check every sender in code, so there is a second fence and the refusal is always posted where people can read it.</p>
+    <p>Then came the reading side. The business asked for reports, exports and charts, so the Switch executor gained a read-only handle on the ledger and started posting files. Switch’s attachment route carries a CSV or a chart image into the room, in the thread the command came from. Tenant budgets cap each agent’s daily output, set once by the bootstrap. When I wanted the team’s own spreadsheet to be the record, a Google Sheet or an Excel workbook linked in chat, the agents got a tool to read it and the ledger executor got a command to load it, accepted from someone in an approver group only.</p>
+    <p>The Switch Console closes the loop. Connect it to the Gateway and every room lists its agents, its document and its group. The Console’s own agents page lists only agents it runs itself, which confused me for an afternoon. Our agents live in rooms, registered over the protocol, and that is where the Console shows them.</p>
+    <h2>Where Switch pushed back</h2>
+    <p>Switch has an outbound guard that refuses private hosts. My second Mattermost, the bring-your-own-server path, ran on the same machine, and Switch could not reach it until I allowed the Docker host alias in the stack’s environment and recreated the container.</p>
+    <p>Right after a Mattermost server is bridged, the Gateway briefly answers room creation with a server error and an expired-session message. The bootstrap now retries on server errors instead of trusting the first answer.</p>
+    <p>I matched rooms by name and reused yesterday’s room on the other bridge. A rehearsal stalled waiting for a channel that never appeared, because the room existed, only not where the agents were listening. Rooms are matched by bridge id as well now.</p>
+    <p>A brief posted immediately after a room was created never reached the agent in it. The Gateway listed the members at once, but the bridge was still syncing them to Mattermost. A short settle after creation fixed it, and the tests set the settle to zero.</p>
+    <p>Attachments have an order. The Gateway user joins the chat, uploads with a client-generated upload id, then sends a message carrying the ids. Skip the join and the upload is refused.</p>
+    <p>Smaller things followed. Agents never see their own posts, so whatever an agent needs to know about what it said earlier has to come back through its tools. Threaded replies do not count as addressed, so a mention inside a thread needs its own handling. The switch-admin bot warns in the room whenever you mention an agent that is not a member, so my executors stopped pointing at each other with mentions and started doing it in plain words. And the Mattermost admin account that Switch signs in as cannot drive a demo, because its posts are the bridge’s own and never come back as events.</p>
+    <p>Most of these are rules I learned by tripping over them, and each became a comment in the code next to the line it explains.</p>
+    <h2>One person, then a team</h2>
+    <p>For the demo I wanted to be the only human on screen. The bootstrap grew a mode where the regular account the Switch stack seeds is put in every room and every approver group, so a single person can walk the plan, the close and a deal end to end and still see the refusal that matters, the one where the books moved under a pending approval.</p>
+    <p>Then I did what a real team would do. I added a colleague as a controller with a single command, which finds or creates her Mattermost account, puts her in the team and in every Switch room, and writes her participant id into the policy. She loaded her company’s workbook, was refused at the CFO and board gates, approved what was hers, and surfaced a real bug. The rooms adapter could only seat people who had existed at bootstrap, so a colleague added later could not be invited into a room the executor opened. The Mattermost participant id carries the username by construction, so the adapter now resolves it directly.</p>
+    <h2>Trying to break it</h2>
+    <p>The executor core is pure code with no I/O, which made it possible to attack it properly. The adversarial tests drive that core with a real ledger file, a fake Gateway, a frozen clock and events in Switch’s real frame shape, the same envelope the parser sees live. They try injection in the ask, a forged approval typed by an agent, an approval above the limit by the wrong group, replay and redelivery, a sale landing between proposal and approval, the right command from the wrong room, an expired proposal, a payment run that smuggles an invoice outside the plan, a lock before the run is paid, and a sales fence that claims its own list price. Each writes a transcript, and each refusal names the reason, the amount and the limit.</p>
+    <h2>What I would tell someone starting with Switch</h2>
+    <p>Write the spike first. Pick the behaviours your design depends on and verify each against a live stack before you write code that assumes them. The Gateway publishes its OpenAPI, and reading it saved me from guessing.</p>
+    <p>Treat the participant id as the product. Everything built on top of Switch gets simpler once you refuse to look at display names.</p>
+    <p>Let the executors open the rooms. A room created by code when a gate passes, with the right people seated and the brief as its instructions, is a better audit trail than any dashboard I could have built.</p>
+    <p>Keep agents off credentials. They draft, people decide, code acts. Once that line is drawn you can let the agents be useful without worrying about what they might be talked into.</p>
+    <h2>Run it</h2>
+    <p>The demo script brings up Switch and Mattermost in Docker, loads the sample month, registers the agents and the executors, and starts the processes. Without an Anthropic key the agents run a deterministic stand-in through the same tools and validators, so every gate and every refusal still happens. The repo is at <a href="https://github.com/kartikangiras/sindarin" target="_blank" rel="noopener">github.com/kartikangiras/sindarin</a>.</p>
+  </article>
+  <p class="post-note">Also published on <a href="https://medium.com/@kartikangiras/how-i-built-a-corporate-finance-teams-production-workflow-into-chat-with-switchai-77ed1fd05ad0" target="_blank" rel="noopener">Medium</a>.</p>
+  <footer><p>built by Kartik Angiras, 2026</p></footer>
+</main>
+
+</body>
+</html>

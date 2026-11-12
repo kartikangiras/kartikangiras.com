@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Attention Is All You Need · Kartik Angiras</title>
+<meta name="description" content="A review of Attention Is All You Need, with notes from reimplementing the Transformer in PyTorch.">
+<link rel="canonical" href="https://kartikangiras.com/literature-reviews/machine-learning/attention-is-all-you-need.html">
+<meta name="author" content="Kartik Angiras">
+<meta name="theme-color" content="#fafaf8">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Kartik Angiras">
+<meta property="og:title" content="Attention Is All You Need · Kartik Angiras">
+<meta property="og:description" content="A review of Attention Is All You Need, with notes from reimplementing the Transformer in PyTorch.">
+<meta property="og:url" content="https://kartikangiras.com/literature-reviews/machine-learning/attention-is-all-you-need.html">
+<meta property="og:image" content="https://kartikangiras.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kartikangiras">
+<meta name="twitter:title" content="Attention Is All You Need · Kartik Angiras">
+<meta name="twitter:description" content="A review of Attention Is All You Need, with notes from reimplementing the Transformer in PyTorch.">
+<meta name="twitter:image" content="https://kartikangiras.com/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+@font-face { font-family: "et-book"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff"); }
+@font-face { font-family: "et-book"; font-weight: 600; font-style: normal; font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); }
+:root {
+  --background: #fafaf8; --foreground: #111111; --muted: #6b7280; --card: #f4f4f2; --border: #e5e5e3;
+  --font: "et-book", "Crimson Pro", Palatino, "Palatino Linotype", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font);
+  font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; border-radius: 3px; }
+.page { max-width: 672px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 56px 0; }
+.back { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); transition: color .15s; }
+.back:hover { color: var(--foreground); }
+.back svg { width: 12px; height: 12px; }
+h1 { margin: 32px 0 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.025em; }
+.lede { margin: 12px 0 0; font-size: 16px; line-height: 1.625; color: var(--muted); }
+.label { margin: 48px 0 16px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.rows { border-top: 1px solid var(--border); }
+.row { display: flex; align-items: baseline; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--border); }
+.row .name { flex: 1; min-width: 0; font-size: 14px; }
+a.row:hover .name { text-decoration: underline; text-underline-offset: 2px; }
+.row .meta { flex-shrink: 0; font-size: 12px; color: var(--muted); }
+.row .meta.mono { font-family: var(--mono); }
+.row svg { flex-shrink: 0; width: 14px; height: 14px; color: var(--border); transition: color .15s; align-self: center; }
+a.row:hover svg { color: var(--foreground); }
+footer { margin-top: 64px; padding-block: 40px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+footer p { margin: 0; }
+.kicker { margin: 32px 0 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.page h1.paper { margin-top: 0; line-height: 1.2; text-wrap: balance; }
+.authors { margin: 12px 0 0; font-size: 14px; line-height: 1.625; color: var(--muted); }
+.review { margin-top: 32px; }
+.review p, .review li { font-size: 15px; line-height: 1.7; }
+.review p { margin: 0 0 16px; }
+.review ul { margin: 0 0 16px; padding-left: 20px; }
+.review li { margin-bottom: 6px; }
+.review li::marker { color: var(--muted); }
+.review h2 { margin: 36px 0 12px; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.review a { text-decoration: underline; text-underline-offset: 2px; }
+.review code { font-family: var(--mono); font-size: 13px; background: var(--card); padding: 1px 5px; border-radius: 4px; }
+.review pre { margin: 0; padding: 14px 16px; overflow-x: auto; background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; font-family: var(--mono); font-size: 12px; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <a class="back" href="../machine-learning.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Machine Learning</a>
+  <p class="kicker">Machine Learning · arXiv:1706.03762 · 2017</p>
+  <h1 class="paper">Attention Is All You Need</h1>
+  <p class="authors">Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin · NeurIPS 2017</p>
+  <p class="lede">The paper that replaced recurrence with attention, and the architecture behind almost every model I work with. I reimplemented it from scratch in PyTorch to see how the pieces fit.</p>
+  <article class="review">
+    <h2>The problem</h2>
+    <p>Before this paper, the strongest translation models were recurrent or convolutional. RNNs process a sentence one token at a time, so training can't be parallelized across a sequence, and information between distant words has to survive many steps of state. Attention already existed, but only as an add-on to a recurrent encoder and decoder.</p>
+    <h2>The core idea</h2>
+    <p>Drop recurrence entirely and let every token look at every other token directly. Each position produces a query, a key and a value. A token's output is a weighted sum of all the values, with weights from how well its query matches each key. The path between any two words is one step long, and a whole sequence is processed in parallel.</p>
+    <h2>The architecture</h2>
+    <ul>
+      <li><strong>Scaled dot-product attention.</strong> Scores are query-key dot products divided by the square root of the key dimension, then a softmax. Without the scaling, large dot products push the softmax into regions with tiny gradients.</li>
+      <li><strong>Multi-head attention.</strong> Instead of one attention over the full width, the model runs 8 smaller heads in parallel (64 dimensions each in the base model) and concatenates them, so different heads can track different relationships.</li>
+      <li><strong>Encoder and decoder stacks.</strong> Six layers each. Every sublayer is wrapped in a residual connection and layer norm. The decoder adds masked self-attention, so a position can't see the future, plus cross-attention over the encoder output.</li>
+      <li><strong>Positional encodings.</strong> Attention has no notion of order, so position is added to the embeddings with fixed sine and cosine waves. The authors note that learned position embeddings performed almost the same.</li>
+    </ul>
+    <h2>Training and results</h2>
+    <p>The models were trained on WMT 2014 translation with Adam, a learning rate that warms up for 4,000 steps and then decays, dropout, and label smoothing. The big model reached 28.4 BLEU on English to German and 41.8 on English to French, beating previous results, including ensembles, at a fraction of the training cost: about 3.5 days on eight P100 GPUs.</p>
+    <h2>What I learned implementing it</h2>
+    <p>My implementation is in <a href="https://github.com/kartikangiras/attention-is-all-you-need" target="_blank" rel="noopener">kartikangiras/attention-is-all-you-need</a>. It is a single <code>main.py</code> with the full encoder-decoder, written while following Aladdin Persson's tutorial.</p>
+    <ul>
+      <li><strong>einsum makes heads readable.</strong> Splitting the embedding into a separate head axis and writing the query-key and attention-value products with <code>torch.einsum</code> makes the code read almost line for line like the equations.</li>
+      <li><strong>Masks are where shapes matter.</strong> The source gets a padding mask and the target gets a lower-triangular causal mask, and both have to broadcast across the head dimension. Masked scores are set to a large negative number before the softmax so they get no weight.</li>
+      <li><strong>A scaling detail I got wrong.</strong> My attention divides scores by the square root of the full embedding size, not the per-head dimension the paper uses. With 8 heads that softens every attention distribution by a factor of about 2.8. It never surfaced because I only checked output shapes, and it's the first thing I'd fix.</li>
+      <li><strong>Learned positions instead of sinusoids.</strong> I used a learned position embedding, which the paper found works about as well. The trade-off is that it can't handle sequences longer than the maximum length it was trained with, while sinusoids can in principle.</li>
+    </ul>
+    <h2>Limitations</h2>
+    <p>Self-attention costs grow with the square of sequence length, which the paper acknowledges and which later work spent years attacking. Its evaluation is mainly translation, plus English constituency parsing. My own implementation is an architecture study, not a reproduction: it has no training loop, label smoothing, learning rate schedule or beam search, and it is only checked with a random-token forward pass.</p>
+    <h2>Why it matters</h2>
+    <p>Nearly every model in my work, from the agents in Sindarin to the ones DeVries audits, is a descendant of this architecture. Implementing attention also made one safety point concrete for me: inside the model there is no separate channel for instructions and data. Every token in the context can attend to every other, which is a big part of why prompt injection is so hard to rule out at the model level and has to be handled around it.</p>
+    <h2>Citation</h2>
+    <pre>@inproceedings{vaswani2017attention,
+  title     = {Attention Is All You Need},
+  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and
+               Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and
+               Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2017}
+}</pre>
+  </article>
+  <footer><p>built by Kartik Angiras, 2026</p></footer>
+</main>
+
+</body>
+</html>
